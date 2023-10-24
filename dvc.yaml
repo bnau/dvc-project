@@ -1,0 +1,32 @@
+stages:
+  data_extraction:
+    cmd: python data_extraction.py
+    deps:
+      - data_extraction.py
+      - data
+    outs:
+      - subset
+  data_preprocessing:
+    cmd: python data_preprocessing.py
+    deps:
+      - data_preprocessing.py
+      - subset
+      - base.h5
+    outs:
+      - preprocessed
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+      - preprocessed
+    outs:
+      - model.h5
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+      - evaluate.py
+      - preprocessed
+    outs:
+      - metrics.json
+metrics:
+  - metrics.json

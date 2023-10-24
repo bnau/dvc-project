@@ -1,0 +1,76 @@
+schema: '2.0'
+stages:
+  data_extraction:
+    cmd: python data_extraction.py
+    deps:
+    - path: data
+      hash: md5
+      md5: ef5006d1b32c149d92d93bd93e062559.dir
+      size: 11407445
+      nfiles: 502
+    - path: data_extraction.py
+      hash: md5
+      md5: efc2bbcebff1488c2e9ee1b7043378f5
+      size: 655
+    outs:
+    - path: subset
+      hash: md5
+      md5: 24dfe777922bd288f73370ee58e8d2c0.dir
+      size: 11312257
+      nfiles: 498
+  data_preprocessing:
+    cmd: python data_preprocessing.py
+    deps:
+    - path: base.h5
+      hash: md5
+      md5: 3b73194463f0c05b1b0075ae62e32ed2
+      size: 58921912
+    - path: data_preprocessing.py
+      hash: md5
+      md5: 1f17c3e597aa7018629401839e86076b
+      size: 1684
+    - path: subset
+      hash: md5
+      md5: 24dfe777922bd288f73370ee58e8d2c0.dir
+      size: 11312257
+      nfiles: 498
+    outs:
+    - path: preprocessed
+      hash: md5
+      md5: 9688f5d77d7207c2bfc01e34be6e1f85.dir
+      size: 25500360
+      nfiles: 6
+  train:
+    cmd: python train.py
+    deps:
+    - path: preprocessed
+      hash: md5
+      md5: 9688f5d77d7207c2bfc01e34be6e1f85.dir
+      size: 25500360
+      nfiles: 6
+    - path: train.py
+      hash: md5
+      md5: a1b53d66cfb9c24195ba106b3729d64c
+      size: 772
+    outs:
+    - path: model.h5
+      hash: md5
+      md5: 125624a2ae74e50d3ad5cc5bd0aeaad4
+      size: 26242152
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+    - path: evaluate.py
+      hash: md5
+      md5: 13717fed93bdf24bca89c783d566eddd
+      size: 400
+    - path: preprocessed
+      hash: md5
+      md5: 9688f5d77d7207c2bfc01e34be6e1f85.dir
+      size: 25500360
+      nfiles: 6
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 7b334e21b94e6d477a9ff654a8de5eee
+      size: 39

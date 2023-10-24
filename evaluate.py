@@ -6,4 +6,6 @@ test_labels = np.load("preprocessed/test_labels.npy")
 
 test_model = keras.models.load_model("model.h5")
 test_loss, test_acc = test_model.evaluate(test_features, test_labels)
-print(f"Test accuracy: {test_acc:.3f}")
+
+with open("metrics.json", "w", encoding="utf-8") as f:
+    f.write(f"{{\"test_accuracy\": {test_acc}}}\n")
