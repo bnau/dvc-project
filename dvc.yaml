@@ -28,5 +28,15 @@ stages:
       - preprocessed
     outs:
       - metrics.json
+  generate_artifact:
+    cmd: mkdir models && cp *.h5 models
+    deps:
+      - model.h5
+      - base.h5
+    outs:
+      - models
 metrics:
   - metrics.json
+artifacts:
+  cats-vs-dogs:
+    path: models

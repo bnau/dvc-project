@@ -5,19 +5,19 @@ stages:
     deps:
     - path: data
       hash: md5
-      md5: ef5006d1b32c149d92d93bd93e062559.dir
-      size: 11407445
-      nfiles: 502
+      md5: ce5e322344ae861016568da5b4d5b34f.dir
+      size: 228434793
+      nfiles: 10028
     - path: data_extraction.py
       hash: md5
-      md5: efc2bbcebff1488c2e9ee1b7043378f5
-      size: 655
+      md5: 8cad69f2e1ce47ab836bdb1c11983f39
+      size: 677
     outs:
     - path: subset
       hash: md5
-      md5: 24dfe777922bd288f73370ee58e8d2c0.dir
-      size: 11312257
-      nfiles: 498
+      md5: 8a2ca7599df22855022f805337b43758.dir
+      size: 113795522
+      nfiles: 4998
   data_preprocessing:
     cmd: python data_preprocessing.py
     deps:
@@ -31,22 +31,22 @@ stages:
       size: 1684
     - path: subset
       hash: md5
-      md5: 24dfe777922bd288f73370ee58e8d2c0.dir
-      size: 11312257
-      nfiles: 498
+      md5: 8a2ca7599df22855022f805337b43758.dir
+      size: 113795522
+      nfiles: 4998
     outs:
     - path: preprocessed
       hash: md5
-      md5: 9688f5d77d7207c2bfc01e34be6e1f85.dir
-      size: 25500360
+      md5: b5d1f314a86740a8cc489ead96a3cf59.dir
+      size: 255918360
       nfiles: 6
   train:
     cmd: python train.py
     deps:
     - path: preprocessed
       hash: md5
-      md5: 9688f5d77d7207c2bfc01e34be6e1f85.dir
-      size: 25500360
+      md5: b5d1f314a86740a8cc489ead96a3cf59.dir
+      size: 255918360
       nfiles: 6
     - path: train.py
       hash: md5
@@ -55,22 +55,22 @@ stages:
     outs:
     - path: model.h5
       hash: md5
-      md5: 125624a2ae74e50d3ad5cc5bd0aeaad4
+      md5: 6722dedc923946260a5ee9956585d56f
       size: 26242152
   evaluate:
     cmd: python evaluate.py
     deps:
     - path: evaluate.py
       hash: md5
-      md5: 13717fed93bdf24bca89c783d566eddd
-      size: 400
+      md5: e51ca30842edaaefd7a6f2ae89b6d5f1
+      size: 389
     - path: preprocessed
       hash: md5
-      md5: 9688f5d77d7207c2bfc01e34be6e1f85.dir
-      size: 25500360
+      md5: b5d1f314a86740a8cc489ead96a3cf59.dir
+      size: 255918360
       nfiles: 6
     outs:
     - path: metrics.json
       hash: md5
-      md5: 7b334e21b94e6d477a9ff654a8de5eee
+      md5: feee762714da261812856d2f5b893e2e
       size: 39
